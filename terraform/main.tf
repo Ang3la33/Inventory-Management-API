@@ -23,20 +23,7 @@ resource "aws_iam_policy_attachment" "lambda_basic_execution" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
-resource "aws_lambda_function" "inventory_lambda" {
-  function_name = "InventoryFunction"
-  role          = aws_iam_role.lambda_role.arn
-  runtime       = "python3.12"
-  handler       = "lambda_function.lambda_handler"
-  filename      = "lambda_function.zip"
-
-  environment {
-    variables = {
-      TABLE_NAME = "InventoryTable"
-    }
-  }
-}
-
+# Output the API Gateway URL
 output "api_gateway_invoke_url" {
   value       = aws_apigatewayv2_api.inventory_api.api_endpoint
   description = "The invoke URL for the API Gateway"
