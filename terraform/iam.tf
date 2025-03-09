@@ -1,17 +1,18 @@
 # IAM Role for Lambda Function 
-resource "aws_iam_role" "lambda_role"
-name = "lambda_execution_role"
+resource "aws_iam_role" "lambda_role" {
+    name = "lambda_execution_role"
 
-assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [{
-        Effect = "Allow"
-        Action = "sts:AssumeRole"
-        Principal = {
-            Service = "lambda.amazonaws.com"
-        }
-    }]
-})
+    assume_role_policy = jsonencode({
+        Version = "2012-10-17"
+        Statement = [{
+            Effect = "Allow"
+            Action = "sts:AssumeRole"
+            Principal = {
+                Service = "lambda.amazonaws.com"
+            }
+        }]
+    })
+}
 
 # IAM Policy for Lambda to Access DynamoDB 
 resource "aws_iam_policy" "dynamodb_access_policy" {
